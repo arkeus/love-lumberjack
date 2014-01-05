@@ -1,19 +1,19 @@
+require "lumberjack.player"
+
 export class GameState extends State
 	new: =>
 		super!
-		@s = Sprite 10, 50
-		@s\create 50, 50, Color\red!
-		@add @s
 
-		@s.angle = math.pi / 10
+		@add Sprite 0, 0, "resource/bg.png"
 
-		@add Sprite 100, 50, "resource/bg.png"
+		@player = Player 10, 10
+		@add @player
 
 	update: =>
-		@s.velocity.y = if axel.keys\down("s") then 100 elseif axel.keys\down("w") then -100 else 0
-		@s.velocity.x = if axel.keys\down("d") then 100 elseif axel.keys\down("a") then -100 else 0
+		@player.velocity.y = if axel.keys\down("s") then 100 elseif axel.keys\down("w") then -100 else 0
+		@player.velocity.x = if axel.keys\down("d") then 100 elseif axel.keys\down("a") then -100 else 0
 
-		@s.angle += math.pi / 10 if axel.keys\pressed(" ")
-		@s.angle -= math.pi / 10 if axel.keys\released(" ")
+		@player.angle += math.pi / 10 if axel.keys\pressed(" ")
+		@player.angle -= math.pi / 10 if axel.keys\released(" ")
 
 		super!
