@@ -5,10 +5,15 @@ export class GameState extends State
 		@s\create 50, 50, Color\red!
 		@add @s
 
+		@s.angle = math.pi / 10
+
 		@add Sprite 100, 50, "resource/bg.png"
 
 	update: =>
 		@s.velocity.y = if axel.keys\down("s") then 100 elseif axel.keys\down("w") then -100 else 0
 		@s.velocity.x = if axel.keys\down("d") then 100 elseif axel.keys\down("a") then -100 else 0
+
+		@s.angle += math.pi / 10 if axel.keys\pressed(" ")
+		@s.angle -= math.pi / 10 if axel.keys\released(" ")
 
 		super!
