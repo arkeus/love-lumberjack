@@ -1,3 +1,3 @@
 require "axel.library"
 
-axel\initialize love
+axel\initialize!
