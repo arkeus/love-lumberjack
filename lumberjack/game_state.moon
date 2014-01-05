@@ -5,4 +5,4 @@ export class GameState extends State
 		s\create 50, 50, Color\red!
 		@add s
 
-		@add Sprite 50, 50, nil, 15, 30
+		@add Sprite 100, 50, "resource/bg.png"
