@@ -4,9 +4,10 @@ export class Player extends Sprite
 	new: (x, y) =>
 		super x, y, "resource/player.png", 5, 5
 
-		@animations\add "stand", { 0 }, 0
-		@animations\add "walk", { 0, 1 }, 4
-		@animations\play "walk"
+		with @animations
+			\add "stand", { 0 }, 0
+			\add "walk", { 0, 1 }, 4
+			\play "walk"
 
 	update: =>
 		@velocity.y = if axel.keys\down("s") then @@speed elseif axel.keys\down("w") then -@@speed else 0
