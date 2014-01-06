@@ -6,7 +6,12 @@ export class GameState extends State
 		super!
 
 		@add Sprite 0, 0, "resource/bg.png"
-		@add World "resource/map.png", "resource/tiles.png"
 
-		@player = Player 10, 10
+		@world = World "resource/map.png", "resource/tiles.png"
+		@add @world
+
+		@player = Player 0, 0
 		@add @player
+
+		@camera\follow @player
+		@camera\set_bounds 0, 0, @world.width, @world.height
