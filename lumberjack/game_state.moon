@@ -10,8 +10,12 @@ export class GameState extends State
 		@world = World "resource/map.png", "resource/tiles.png"
 		@add @world
 
-		@player = Player 0, 0
+		@player = Player 20, 16
 		@add @player
 
 		@camera\follow @player
 		@camera\set_bounds 0, 0, @world.width, @world.height
+
+	update: =>
+		super!
+		axel\collide @player, @world
