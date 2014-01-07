@@ -5,7 +5,11 @@ export class GameState extends State
 	new: =>
 		super!
 
-		@add Sprite 0, 0, "resource/bg.png"
+		@background = Sprite 0, 0, "resource/bg.png"
+		with @background.scroll_factor
+			.x = 0
+			.y = 0
+		@add @background
 
 		@world = World "resource/map.png", "resource/tiles.png"
 		@add @world
