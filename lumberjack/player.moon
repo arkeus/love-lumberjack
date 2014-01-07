@@ -1,8 +1,16 @@
 export class Player extends Sprite
-	@speed: 50
+	@air_acceleration: 250
+	@liquid_acceleration: 50
+	@air_drag: 300
+	@liquid_drag: 6000
+	@air_terminal: 400
+	@liquid_terminal: 20
+	@speed: 40
 
 	new: (x, y) =>
 		super x, y, "resource/player.png", 5, 5
+
+		@acceleration.y = @@air_acceleration
 
 		with @animations
 			\add "stand", { 0 }, 0
@@ -10,7 +18,19 @@ export class Player extends Sprite
 			\play "walk"
 
 	update: =>
-		@velocity.y = if axel.keys\down("s") then @@speed elseif axel.keys\down("w") then -@@speed else 0
-		@velocity.x = if axel.keys\down("d") then @@speed elseif axel.keys\down("a") then -@@speed else 0
-		@animations\play if @velocity\is_zero! then "stand" else "walk"
+		@physics!
+		@input!
+		@animation!
 		super!
+
+	physics: =>
+		@drag.x = @@air_drag
+		@acceleration.y = @@air_acceleration
+		@max_velocity.y = @@air_terminal
+
+	input: =>
+		@velocity.x = if axel.keys\down("d") then @@speed elseif axel.keys\down("a") then -@@speed else 0
+		@velocity.y = -100 if axel.keys\pressed("w")
+
+	animation: =>
+		@animations\play if @velocity\is_zero! then "stand" else "walk"

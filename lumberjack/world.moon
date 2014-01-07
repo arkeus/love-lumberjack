@@ -4,7 +4,7 @@ export class World extends Tilemap
 	new: (map, tileset) =>
 		super!
 		data = ImageTileMapper!\build map, @@tile_mapping
-		@load data, tileset, 4, 4
+		@load data, tileset, 4, 4, 25
 
 	@tile_mapping: { color, index for index, color in ipairs {
 		0x000000, 0x1f1400, 0x222222, 0x0c90ff, 0xe22929,
