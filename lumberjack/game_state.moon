@@ -5,17 +5,15 @@ export class GameState extends State
 	new: =>
 		super!
 
-		@background = Sprite 0, 0, "resource/bg.png"
-		with @background.scroll_factor
-			.x = 0
-			.y = 0
-		@add @background
+		@add with @background = Sprite 0, 0, "resource/bg.png"
+			.scroll_factor\zero!
 
-		@world = World "resource/map.png", "resource/tiles.png"
-		@add @world
+		@add with @world = World "resource/map.png", "resource/tiles.png" do nil
+		@add with @player = Player 20, 16 do nil
 
-		@player = Player 20, 16
-		@add @player
+		@add with @text = Text 10, 0, "This is a test"
+			.zoomable = false
+			.scroll_factor\zero!
 
 		@camera\follow @player
 		@camera\set_bounds 0, 0, @world.width, @world.height
