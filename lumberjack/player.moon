@@ -30,7 +30,7 @@ export class Player extends Sprite
 
 	input: =>
 		@velocity.x = if axel.keys\down("d") then @@speed elseif axel.keys\down("a") then -@@speed else 0
-		@velocity.y = -100 if axel.keys\pressed("w")
+		@velocity.y = -100 if axel.keys\pressed("w") and @touching.down
 
 	animation: =>
 		@animations\play if @velocity\is_zero! then "stand" else "walk"
