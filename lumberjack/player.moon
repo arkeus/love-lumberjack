@@ -13,9 +13,9 @@ export class Player extends Sprite
 		@acceleration.y = @@air_acceleration
 
 		with @animations
-			\add "stand", { 0 }, 0
-			\add "walk", { 0, 1 }, 4
-			\play "walk"
+			\add "stand", { 0, 0, 0, 0 }, 2, false, -> print "Stand"
+			\add "walk", { 0, 1 }, 4, true, -> print "End walk"
+			\play "stand"
 
 	update: =>
 		@physics!
