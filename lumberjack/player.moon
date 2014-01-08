@@ -34,3 +34,5 @@ export class Player extends Sprite
 
 	animation: =>
 		@animations\play if @velocity\is_zero! then "stand" else "walk"
+		@facing = LEFT if @velocity.x < 0
+		@facing = RIGHT if @velocity.x > 0
