@@ -19,8 +19,8 @@ export class GameState extends State
 		@camera\set_bounds 0, 0, @world.width, @world.height
 
 	update: =>
-		print axel.mouse.x, axel.mouse.y
 		@add Text axel.mouse.x, axel.mouse.y, "L" if axel.mouse\pressed("l")
 		@add Text axel.mouse.x, axel.mouse.y, "R" if axel.mouse\pressed("r")
 		super!
 		axel\collide @player, @world
+		--print love.timer.getFPS!

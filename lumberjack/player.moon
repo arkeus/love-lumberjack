@@ -11,6 +11,7 @@ export class Player extends Sprite
 		super x, y, "resource/player.png", 5, 5
 
 		@acceleration.y = @@air_acceleration
+		@liquid_timer = 0
 
 		with @animations
 			\add "stand", { 0, 0, 0, 0 }, 2, false, -> print "Stand"
@@ -24,9 +25,15 @@ export class Player extends Sprite
 		super!
 
 	physics: =>
-		@drag.x = @@air_drag
-		@acceleration.y = @@air_acceleration
-		@max_velocity.y = @@air_terminal
+		@liquid_timer -= 1
+		if @liquid_timer > 0
+			@drag.x = @@liquid_drag
+			@acceleration.y = @@liquid_acceleration
+			@max_velocity.y = if @velocity.y > 0 then @@liquid_terminal else @@air_terminal
+		else
+			@drag.x = @@air_drag
+			@acceleration.y = @@air_acceleration
+			@max_velocity.y = @@air_terminal
 
 	input: =>
 		@velocity.x = if axel.keys\down("d") then @@speed elseif axel.keys\down("a") then -@@speed else 0
@@ -36,3 +43,6 @@ export class Player extends Sprite
 		@animations\play if @velocity\is_zero! then "stand" else "walk"
 		@facing = LEFT if @velocity.x < 0
 		@facing = RIGHT if @velocity.x > 0
+
+	submerge: =>
+		@liquid_timer = 3

@@ -1,10 +1,17 @@
 require "lumberjack.image_tile_mapper"
 
 export class World extends Tilemap
+	@liquid_tiles: { 9, 10, 19, 20 }
+
 	new: (map, tileset) =>
 		super!
 		data = ImageTileMapper!\build map, @@tile_mapping
 		@load data, tileset, 4, 4, 25
+		@initialize_liquid_callback!
+
+	initialize_liquid_callback: =>
+		for tile in *@get_tiles(@@liquid_tiles)
+			tile.callback = (tile, player) -> player\submerge!
 
 	@tile_mapping: { color, index for index, color in ipairs {
 		0x000000, 0x1f1400, 0x222222, 0x0c90ff, 0xe22929,
