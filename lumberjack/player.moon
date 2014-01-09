@@ -14,8 +14,8 @@ export class Player extends Sprite
 		@liquid_timer = 0
 
 		with @animations
-			\add "stand", { 0, 0, 0, 0 }, 2, false, -> print "Stand"
-			\add "walk", { 0, 1 }, 4, true, -> print "End walk"
+			\add "stand", { 0, 0, 0, 0 }, 2, false
+			\add "walk", { 0, 1 }, 4, true
 			\play "stand"
 
 	update: =>
