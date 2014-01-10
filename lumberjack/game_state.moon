@@ -6,14 +6,14 @@ export class GameState extends State
 		super!
 
 		@add with @background = Sprite 0, 0, "resource/bg.png"
-			.scroll_factor\zero!
+			.scroll\zero!
 
 		@add with @world = World "resource/map.png", "resource/tiles.png" do nil
 		@add with @player = Player 20, 16 do nil
 
-		@add with @text = Text 10, 0, "This is a test"
+		@add with @text = Text 10, 0, "FPS: 0"
 			.zoomable = false
-			.scroll_factor\zero!
+			.scroll\zero!
 
 		@camera\follow @player
 		@camera\set_bounds 0, 0, @world.width, @world.height
@@ -23,4 +23,8 @@ export class GameState extends State
 		@add Text axel.mouse.x, axel.mouse.y, "R" if axel.mouse\pressed("r")
 		super!
 		axel\collide @player, @world
-		--print love.timer.getFPS!
+		@text.text = "FPS: #{love.timer.getFPS!}"
+
+		if axel.keys\pressed " "
+			@camera\fade_out 1, Color\black!, ->
+				@camera\fade_in 1
