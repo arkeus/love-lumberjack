@@ -18,8 +18,6 @@ export class Player extends Sprite
 			\add "walk", { 0, 1 }, 4, true
 			\play "stand"
 
-		@timers\add 1, 0, -> print "I am #{self}, and my screen is #{@screen}"
-
 	update: =>
 		@physics!
 		@input!
