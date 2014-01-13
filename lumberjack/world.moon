@@ -7,9 +7,6 @@ export class World extends Tilemap
 		super!
 		data = ImageTileMapper!\build map, @@tile_mapping
 		@load data, tileset, 4, 4, 25
-		@initialize_liquid_callback!
-
-	initialize_liquid_callback: =>
 		for tile in *@get_tiles(@@liquid_tiles)
 			tile.callback = (tile, player) -> player\submerge!
 

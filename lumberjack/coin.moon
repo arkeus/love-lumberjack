@@ -7,6 +7,7 @@ export class Coin extends Sprite
 			\play "shine"
 
 		@offset.x = -1
+		@width = 4
 
 	collect: =>
 		axel.particle\emit "coin", @center.x, @center.y, 50

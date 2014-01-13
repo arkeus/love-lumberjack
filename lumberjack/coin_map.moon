@@ -1,3 +1,5 @@
+require "lumberjack.coin"
+
 export class CoinMap extends Group
 	new: (tile_width, tile_height) =>
 		super!
