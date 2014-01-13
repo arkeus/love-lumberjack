@@ -40,7 +40,10 @@ export class Player extends Sprite
 		@velocity.y = -100 if axel.keys\pressed("w") and @touching.down
 
 	animation: =>
-		@animations\play if @velocity\is_zero! then "stand" else "walk"
+		if @velocity\is_zero!
+			@animations\play "stand"
+		else
+			@animations\play "walk"
 		@facing = LEFT if @velocity.x < 0
 		@facing = RIGHT if @velocity.x > 0
 
