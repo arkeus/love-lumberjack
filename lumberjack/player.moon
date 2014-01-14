@@ -28,7 +28,7 @@ export class Player extends Sprite
 		@liquid_timer -= 1
 		if @liquid_timer > 0
 			@drag.x = @@liquid_drag
-			@acceleration.y = @@liquid_acceleration
+			@acceleration.y = if @velocity.y > 0 then @@liquid_acceleration else @@air_acceleration
 			@max_velocity.y = if @velocity.y > 0 then @@liquid_terminal else @@air_terminal
 		else
 			@drag.x = @@air_drag
@@ -47,5 +47,8 @@ export class Player extends Sprite
 		@facing = LEFT if @velocity.x < 0
 		@facing = RIGHT if @velocity.x > 0
 
-	submerge: =>
+	submerge: (tile_index) =>
+		if @liquid_timer < 1
+			particle_type = if tile_index == 9 or tile_index == 19 then "water" else "lava"
+			axel.particle\emit particle_type, @center.x, @center.y, 10
 		@liquid_timer = 3

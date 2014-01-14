@@ -8,7 +8,7 @@ export class World extends Tilemap
 		data = ImageTileMapper!\build map, @@tile_mapping
 		@load data, tileset, 4, 4, 25
 		for tile in *@get_tiles(@@liquid_tiles)
-			tile.callback = (tile, player) -> player\submerge!
+			tile.callback = (tile, player) -> player\submerge tile.index
 
 	@tile_mapping: { color, index for index, color in ipairs {
 		0x000000, 0x1f1400, 0x222222, 0x0c90ff, 0xe22929,

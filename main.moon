@@ -6,4 +6,4 @@ require "lumberjack.particles"
 axel.create = =>
 	Particles\initialize!
 
-axel\initialize GameState, 4
+axel\initialize TitleState, 4
